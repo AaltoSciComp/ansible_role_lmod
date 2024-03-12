@@ -1,0 +1,18 @@
+#!/bin/csh
+# -*- csh -*-
+# vim:ft=csh:et:ts=4
+
+# {{ ansible_managed }}
+# Managed by ansible_role_lmod
+
+{% if lmod_sitepackage_dir | default('') | length > 0 %}
+setenv LMOD_PACKAGE_PATH {{ lmod_sitepackage_dir | dirname }}
+{%- endif %} 
+
+{% if lmod_admin_file_path | default('') | length > 0 %}
+setenv LMOD_ADMIN_FILE {{ lmod_admin_file_path }}
+{%- endif %} 
+
+{% if lmod_modulerc_path | default('') | length > 0 %}
+setenv LMOD_MODULERCFILE={{ lmod_modulerc_path }}
+{%- endif %}

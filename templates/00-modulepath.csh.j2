@@ -1,0 +1,14 @@
+#!/bin/csh
+# -*- csh -*-
+# vim:ft=csh:et:ts=4
+
+# {{ ansible_managed }}
+# Managed by ansible_role_lmod
+
+{% if lmod_modulepaths_path | default('') | length > 0 %}
+setenv LMOD_MODULEPATH_INIT {{ lmod_modulepaths_path }}
+{% endif %}
+
+if (! $?MODULEPATH && ( `readlink /etc/alternatives/modules.csh` == /usr/share/lmod/lmod/init/cshrc || -f /etc/profile.d/z00_lmod.csh ) ) then
+  setenv MODULEPATH /etc/modulefiles:/usr/share/modulefiles
+endif

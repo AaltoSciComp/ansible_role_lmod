@@ -1,0 +1,18 @@
+---
+# defaults file for ansible_role_lmod
+
+lmod_install: true
+
+lmod_modulepaths:
+  - /usr/share/lmod/lmod/modulefiles/Core
+
+lmod_modulepaths_path: ""
+
+lmod_sitepackage_template: files/SitePackage.lua.j2
+lmod_sitepackage_dir: /etc/lmod/
+
+lmod_admin_file_template: files/admin.list.j2
+lmod_admin_file_path: /etc/lmod/admin.list
+
+lmod_modulerc_template: files/modulerc.lua.j2
+lmod_modulerc_path: /etc/lmod/modulerc.lua

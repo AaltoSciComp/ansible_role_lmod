@@ -1,0 +1,14 @@
+#!/bin/bash
+# -*- sh -*-
+# vim:ft=sh:et:ts=4
+
+# {{ ansible_managed }}
+# Managed by ansible_role_lmod
+
+{% if lmod_modulepaths_path | default('') | length > 0 %}
+export LMOD_MODULEPATH_INIT={{ lmod_modulepaths_path }}
+{% endif %}
+
+[ -z "$MODULEPATH" ] &&
+  [ "$(readlink /etc/alternatives/modules.sh)" = "/usr/share/lmod/lmod/init/profile" -o -f /etc/profile.d/z00_lmod.sh ] &&
+  export MODULEPATH=/etc/modulefiles:/usr/share/modulefiles || :

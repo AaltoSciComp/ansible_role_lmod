@@ -1,0 +1,18 @@
+galaxy_info:
+  author: Simo Tuomisto
+  namespace: aaltoscicomp
+  description: Role that install Lmod
+  company: Aalto University
+
+  license: MIT
+
+  min_ansible_version: "2.1"
+
+  platforms:
+  - name: RedHat
+    versions:
+    - 9
+
+  galaxy_tags: []
+
+dependencies: []

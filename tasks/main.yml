@@ -1,0 +1,76 @@
+---
+# tasks file for ansible_role_lmod
+
+- name: Run OS specific installation
+  ansible.builtin.include_tasks: "{{ item }}"
+  with_first_found:
+    - "install_{{ ansible_distribution }}-{{ ansible_distribution_major_version}}.yml"
+    - "install_{{ ansible_distribution }}.yml"
+    - "install_{{ ansible_os_family }}.yml"
+  when: lmod_install
+
+- name: Create Lmod configuration directory
+  ansible.builtin.file:
+    path: /etc/lmod
+    state: directory
+    owner: root
+    group: root
+    mode: '0755'
+
+- name: Template Lmod modulespath file
+  ansible.builtin.template:
+    src: "modulespath.j2"
+    dest: "{{ lmod_modulepaths_path | default('/etc/lmod/.modulespath', true) }}"
+    owner: root
+    group: root
+    mode: '0644'
+  when: lmod_modulepaths | default([]) | length > 0
+
+- name: Template Lmod SitePackage
+  ansible.builtin.template:
+    src: "{{ lmod_sitepackage_template }}"
+    dest: "{{ lmod_sitepackage_dir }}/SitePackage.lua"
+    owner: root
+    group: root
+    mode: '0644'
+  when: lmod_sitepackage_template | default('') | length > 0
+
+- name: Template Lmod admin file
+  ansible.builtin.template:
+    src: "{{ lmod_admin_file_template }}"
+    dest: "{{ lmod_admin_file_path }}"
+    owner: root
+    group: root
+    mode: '0644'
+  when: lmod_admin_file_template | default('') | length > 0
+
+- name: Template Lmod modulerc file
+  ansible.builtin.template:
+    src: "{{ lmod_modulerc_template }}"
+    dest: "{{ lmod_modulerc_path }}"
+    owner: root
+    group: root
+    mode: '0644'
+  when: lmod_modulerc_path | default('') | length > 0
+
+- name: Template Lmod modulepath profile.d scripts
+  ansible.builtin.template:
+    src: "{{ item }}"
+    dest: "/etc/profile.d/{{ item | replace('.j2', '') }}"
+    owner: root
+    group: root
+    mode: '0644'
+  loop:
+    - 00-modulepath.sh.j2
+    - 00-modulepath.csh.j2
+
+- name: Template profile.d scripts for other Lmod parameters
+  ansible.builtin.template:
+    src: "{{ item }}"
+    dest: "/etc/profile.d/{{ item | replace('.j2', '') }}"
+    owner: root
+    group: root
+    mode: '0755'
+  loop:
+    - z00_lmod.sh.j2
+    - z00_lmod.csh.j2
