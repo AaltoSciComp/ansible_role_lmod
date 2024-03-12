@@ -7,7 +7,7 @@
 
 {% if lmod_extra_env_vars | length > 0 %}
 {% for key, value in lmod_extra_env_vars.items() %}
-setenv {{ key }}="{{ value }}"
+setenv {{ key }} "{{ value }}"
 {%- endfor %}
 {%- endif %}
 
@@ -20,5 +20,5 @@ setenv LMOD_ADMIN_FILE {{ lmod_admin_file_path }}
 {%- endif %} 
 
 {% if lmod_modulerc_path | default('') | length > 0 %}
-setenv LMOD_MODULERCFILE={{ lmod_modulerc_path }}
+setenv LMOD_MODULERCFILE {{ lmod_modulerc_path }}
 {%- endif %}
