@@ -8,7 +8,7 @@
 {% if lmod_extra_env_vars | length > 0 %}
 {% for key, value in lmod_extra_env_vars.items() %}
 setenv {{ key }} "{{ value }}"
-{%- endfor %}
+{% endfor %}
 {%- endif %}
 
 {% if lmod_sitepackage_dir | default('') | length > 0 %}
