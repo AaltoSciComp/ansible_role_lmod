@@ -12,7 +12,7 @@ export {{ key }}="{{ value }}"
 {%- endif %}
 
 {% if lmod_sitepackage_dir | default('') | length > 0 %}
-export LMOD_PACKAGE_PATH={{ lmod_sitepackage_dir | dirname }}
+export LMOD_PACKAGE_PATH={{ lmod_sitepackage_dir }}
 {%- endif %}
 
 {% if lmod_admin_file_path | default('') | length > 0 %}
