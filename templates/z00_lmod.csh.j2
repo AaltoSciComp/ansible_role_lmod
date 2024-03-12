@@ -5,6 +5,12 @@
 # {{ ansible_managed }}
 # Managed by ansible_role_lmod
 
+{% if lmod_extra_env_vars | length > 0 %}
+{% for key, value in lmod_extra_env_vars.items() %}
+setenv {{ key }}="{{ value }}"
+{%- endfor %}
+{%- endif %}
+
 {% if lmod_sitepackage_dir | default('') | length > 0 %}
 setenv LMOD_PACKAGE_PATH {{ lmod_sitepackage_dir | dirname }}
 {%- endif %} 

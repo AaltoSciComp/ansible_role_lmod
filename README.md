@@ -22,6 +22,7 @@ Role Variables
 | `lmod_admin_file_path`      | `"/etc/lmod/admin.list`                    | Path where admin.list should be.                                                                     |
 | `lmod_modulerc_template`    | `"files/modulerc.lua.j2"`                  | Template for the modulerc.lua-file. If empty, file won't be templated.                               |
 | `lmod_modulerc_path`        | `"/etc/lmod/modulerc.lua"`                 | Path where modulerc.lua should be.                                                                   |
+| `lmod_extra_env_vars`       | `{}`                                       | Dictionary of extra environment variables that should be specified in the init scripts.              |
 
 Dependencies
 ------------

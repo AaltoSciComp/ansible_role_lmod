@@ -13,5 +13,7 @@ provisioner:
     host_vars:
       instance:
         lmod_modulepaths_path: /etc/lmod/modulepath
+        lmod_extra_env_vars:
+          LMOD_PAGER: /bin/less
 verifier:
   name: ansible
