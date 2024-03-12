@@ -4,7 +4,7 @@
 - name: Run OS specific installation
   ansible.builtin.include_tasks: "{{ item }}"
   with_first_found:
-    - "install_{{ ansible_distribution }}-{{ ansible_distribution_major_version}}.yml"
+    - "install_{{ ansible_distribution }}-{{ ansible_distribution_major_version }}.yml"
     - "install_{{ ansible_distribution }}.yml"
     - "install_{{ ansible_os_family }}.yml"
   when: lmod_install
