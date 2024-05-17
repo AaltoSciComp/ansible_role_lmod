@@ -6,7 +6,14 @@
 # Managed by ansible_role_lmod
 
 {% if lmod_modulepaths_path | default('') | length > 0 %}
+{% if lmod_norootmodpath | default(false) %}
+# Check if the user is root
+if ( $uid != 0 ) then
+{% endif %}
 setenv LMOD_MODULEPATH_INIT {{ lmod_modulepaths_path }}
+{% if lmod_norootmodpath | default(false) %}
+endif
+{% endif %}
 {% endif %}
 
 if (! $?MODULEPATH && ( `readlink /etc/alternatives/modules.csh` == /usr/share/lmod/lmod/init/cshrc || -f /etc/profile.d/z00_lmod.csh ) ) then

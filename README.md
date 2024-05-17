@@ -23,6 +23,7 @@ Role Variables
 | `lmod_modulerc_template`    | `"files/modulerc.lua.j2"`                  | Template for the modulerc.lua-file. If empty, file won't be templated.                               |
 | `lmod_modulerc_path`        | `"/etc/lmod/modulerc.lua"`                 | Path where modulerc.lua should be.                                                                   |
 | `lmod_extra_env_vars`       | `{}`                                       | Dictionary of extra environment variables that should be specified in the init scripts.              |
+| `lmod_norootmodpath`        | `false`                                    | Disable lmod path setting for root via LMOD_MODULEPATH_INIT                                          |
 
 Dependencies
 ------------

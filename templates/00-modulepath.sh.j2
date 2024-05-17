@@ -6,7 +6,14 @@
 # Managed by ansible_role_lmod
 
 {% if lmod_modulepaths_path | default('') | length > 0 %}
+{% if lmod_norootmodpath | default(false) %}
+# Check if the user is root
+if [ `id -u` != 0 ]; then
+{% endif %}
 export LMOD_MODULEPATH_INIT={{ lmod_modulepaths_path }}
+{% if lmod_norootmodpath | default(false) %}
+fi
+{% endif %}
 {% endif %}
 
 [ -z "$MODULEPATH" ] &&
