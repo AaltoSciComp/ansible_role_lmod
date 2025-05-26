@@ -24,6 +24,7 @@ Role Variables
 | `lmod_modulerc_path`        | `"/etc/lmod/modulerc.lua"`                 | Path where modulerc.lua should be.                                                                   |
 | `lmod_extra_env_vars`       | `{}`                                       | Dictionary of extra environment variables that should be specified in the init scripts.              |
 | `lmod_norootmodpath`        | `false`                                    | Disable lmod path setting for root via LMOD_MODULEPATH_INIT                                          |
+| `lmod_default_modules`      | `[]`                                       | List of modules that will be loaded by default                                                       |
 
 Dependencies
 ------------

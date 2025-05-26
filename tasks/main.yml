@@ -74,3 +74,15 @@
   loop:
     - z00_lmod.sh.j2
     - z00_lmod.csh.j2
+
+- name: Template profile.d scripts for loading standard modules
+  ansible.builtin.template:
+    src: "{{ item }}"
+    dest: "/etc/profile.d/{{ item | replace('.j2', '') }}"
+    owner: root
+    group: root
+    mode: '0755'
+  loop:
+    - z01_stdEnv.sh.j2
+    - z01_stdEnv.csh.j2
+  when: lmod_default_modules | default([]) | length > 0

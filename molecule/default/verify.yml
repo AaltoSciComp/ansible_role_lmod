@@ -5,6 +5,14 @@
   hosts: all
   gather_facts: false
   tasks:
-    - name: Example assertion
+    - name: Check that module lmod is loaded
+      ansible.builtin.command: 
+        cmd: "bash -l -c 'module --redirect -t list'"
+      register: lmod_load_cmd
+      changed_when: lmod_load_cmd.rc != 0
+    - name: Print output of module listing
+      ansible.builtin.debug:
+        msg: "{{ lmod_load_cmd.stdout }}"
+    - name: Verify that module lmod is loaded by default
       ansible.builtin.assert:
-        that: true
+        that: "lmod_load_cmd.stdout == 'lmod'"

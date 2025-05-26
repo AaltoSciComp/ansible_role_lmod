@@ -17,6 +17,8 @@ lmod_admin_file_path: /etc/lmod/admin.list
 lmod_modulerc_template: files/modulerc.lua.j2
 lmod_modulerc_path: /etc/lmod/modulerc.lua
 
+lmod_default_modules: []
+
 lmod_extra_env_vars: {}
 
 lmod_norootmodpath: false
