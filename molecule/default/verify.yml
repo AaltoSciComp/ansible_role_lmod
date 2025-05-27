@@ -1,12 +1,33 @@
 ---
 # This is an example playbook to execute Ansible tests.
 
-- name: Verify
+- name: Create test user
   hosts: all
   gather_facts: false
   tasks:
+    - name: "Create testusers group"
+      ansible.builtin.group:
+        name: testusers
+        state: present
+    - name: "Create testuser"
+      ansible.builtin.user:
+        name: testuser
+        group: testusers
+        create_home: true
+        shell: /bin/bash
+    - name: Install sudo
+      ansible.builtin.package:
+        name: sudo
+        state: present
+
+- name: Verify
+  hosts: all
+  gather_facts: false
+  become: true
+  become_user: testuser
+  tasks:
     - name: Check that module lmod is loaded
-      ansible.builtin.command: 
+      ansible.builtin.command:
         cmd: "bash -l -c 'module --redirect -t list'"
       register: lmod_load_cmd
       changed_when: lmod_load_cmd.rc != 0
